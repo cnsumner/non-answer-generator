@@ -8,11 +8,10 @@ stages:
 # Run `cargo build` for the project with stable Rust
 run-build:
   stage: build
-  image: rust:latest
+  image: ekidd/rust-musl-builder:latest
   script:
-  - rustup target add x86_64-unknown-linux-musl
   - rustc --version && cargo --version
-  - cargo build --release --target x86_64-unknown-linux-musl --jobs 1
+  - cargo build --release --jobs 1
   - cp target/release/non-answer-generator ./non-answer-generator
   - cp example/config.json ./config.json
   artifacts:
