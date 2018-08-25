@@ -8,6 +8,7 @@ extern crate serde_json;
 // #[macro_use]
 extern crate serenity;
 extern crate typemap;
+extern crate openssl_probe;
 
 use config::{Config, File};
 use rand::Rng;
@@ -104,6 +105,8 @@ impl EventHandler for Handler {
 }
 
 fn main() {
+	openssl_probe::init_ssl_cert_env_vars();
+	
 	let mut config = Config::default();
 	config
 		.merge(File::with_name("config"))
