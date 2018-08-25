@@ -12,10 +12,6 @@ run-build:
   script:
   - rustc --version && cargo --version
   - cargo build --release --jobs 1
-  - cp target/release/non-answer-generator ./non-answer-generator
-  - cp example/config.json ./config.json
   artifacts:
     paths:
-      - non-answer-generator
-      - config.json
-      - README.md
+      - target
