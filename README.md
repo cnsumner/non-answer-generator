@@ -27,6 +27,11 @@ The bot will learn and also respond on it's own, no need to @ it or anything lik
 
 By default the bot has a 1 in 20 chance of saying something every time a message is sent on the server (this will be configurable later).
 
+The following command can also be used:
+- `~random` generates a random messages
+- `~gen [n] [words]` where `[n]` should be a number (1 to 250) and `[words]` is a list of words (space separated) to start with
+- `~info` displays the number of words known by the bot
+
 How do I add it to my server?
 ------------
 

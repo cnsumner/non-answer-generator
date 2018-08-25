@@ -1,5 +1,5 @@
 # Use Rust docker image, see: https://hub.docker.com/_/rust/
-image: rust:latest
+image: ekidd/rust-musl-builder:latest
 
 # Defines stages which are to be executed
 stages:
