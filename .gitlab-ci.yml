@@ -10,8 +10,9 @@ run-build:
   stage: build
   image: rust:latest
   script:
+  - rusup target add x86_64-unknown-linux-gnu
   - rustc --version && cargo --version
-  - cargo build --release --jobs 1
+  - cargo build --release --target x86_64-unknown-linux-gnu --jobs 1
   - cp target/release/non-answer-generator ./non-answer-generator
   - cp example/config.json ./config.json
   artifacts:
