@@ -28,6 +28,7 @@ build-windows:
   image: rust:latest
   script:
   - cargo install cross
+  - PATH=$CI_PROJECT_DIR/.cargo/bin:$PATH
   - cross build --release --target x86_64-pc-windows-gnu --jobs 1
   artifacts:
     paths:
