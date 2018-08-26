@@ -6,22 +6,22 @@ stages:
   - build
 
 # Run `cargo build` for the project with stable Rust
-build-linux:
-  stage: build
-  image: ekidd/rust-musl-builder:latest
-  script:
-  - rustc --version && cargo --version
-  - cargo build --release --jobs 1
-  artifacts:
-    paths:
-      - target
-  cache:
-    paths:
-      - target/
-      - .cargo/
-  variables:
-    GIT_STRATEGY: fetch
-    CARGO_HOME: "$CI_PROJECT_DIR/.cargo"
+# build-linux:
+#   stage: build
+#   image: ekidd/rust-musl-builder:latest
+#   script:
+#   - rustc --version && cargo --version
+#   - cargo build --release --jobs 1
+#   artifacts:
+#     paths:
+#       - target
+#   cache:
+#     paths:
+#       - target/
+#       - .cargo/
+#   variables:
+#     GIT_STRATEGY: fetch
+#     CARGO_HOME: "$CI_PROJECT_DIR/.cargo"
 
 build-windows:
   stage: build
