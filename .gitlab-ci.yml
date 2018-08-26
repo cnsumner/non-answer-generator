@@ -32,6 +32,7 @@ build-windows:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_DRIVER: overlay2
   script:
+  - echo 'http://dl-6.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories
   - apk update
   - apk upgrade
   - apk add rustup
