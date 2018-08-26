@@ -33,7 +33,9 @@ build-windows:
     DOCKER_DRIVER: overlay2
   script:
   - apk add curl
-  - curl https://sh.rustup.rs -sSf | sh -s -- -y
+  - curl https://sh.rustup.rs > rustup.sh
+  - chmod +x rustup.sh
+  - ./rustup.sh -y
   - cargo install cross
   - PATH=$CI_PROJECT_DIR/.cargo/bin:$PATH
   - cross build --release --target x86_64-pc-windows-gnu --jobs 1
