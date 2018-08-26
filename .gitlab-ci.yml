@@ -25,17 +25,13 @@ stages:
 
 build-windows:
   stage: build
-  image: docker:stable
+  image: rust:latest
   services:
     - docker:dind
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_DRIVER: overlay2
   script:
-  - echo 'http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories
-  - apk update
-  - apk upgrade
-  - apk add rustup
   - rustup add x86_64-pc-windows-gnu
   - cargo install cross
   - PATH=$CI_PROJECT_DIR/.cargo/bin:$PATH
