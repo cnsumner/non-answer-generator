@@ -32,8 +32,9 @@ build-windows:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_DRIVER: overlay2
   script:
-  - apk add curl
-  - curl https://sh.rustup.rs -sSf | sh -s -- -y
+  - apk update
+  - apk upgrade
+  - apk add rust cargo
   - cargo install cross
   - PATH=$CI_PROJECT_DIR/.cargo/bin:$PATH
   - cross build --release --target x86_64-pc-windows-gnu --jobs 1
