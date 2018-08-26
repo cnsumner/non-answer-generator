@@ -6,7 +6,7 @@ stages:
   - build
 
 # Run `cargo build` for the project with stable Rust
-run-build:
+build-linux:
   stage: build
   image: ekidd/rust-musl-builder:latest
   script:
@@ -15,3 +15,10 @@ run-build:
   artifacts:
     paths:
       - target
+  cache:
+    paths:
+      - target/
+      - .cargo/
+  variables:
+    GIT_STRATEGY: fetch
+    CARGO_HOME: "$CI_PROJECT_DIR/.cargo"
