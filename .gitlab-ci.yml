@@ -25,10 +25,9 @@ build-linux:
 
 build-windows:
   stage: build
-  image: rust:latest
+  image: docker:stable
   script:
-  - apt-get update
-  - apt-get install docker
+  - curl https://sh.rustup.rs -sSf | sh
   - cargo install cross
   - PATH=$CI_PROJECT_DIR/.cargo/bin:$PATH
   - cross build --release --target x86_64-pc-windows-gnu --jobs 1
