@@ -26,7 +26,13 @@ build-linux:
 build-windows:
   stage: build
   image: docker:stable
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
   script:
+  - apk add curl
   - curl https://sh.rustup.rs -sSf | sh
   - cargo install cross
   - PATH=$CI_PROJECT_DIR/.cargo/bin:$PATH
