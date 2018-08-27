@@ -1,20 +1,21 @@
-# Use Rust docker image, see: https://hub.docker.com/_/rust/
 image: ekidd/rust-musl-builder:latest
 
-# Defines stages which are to be executed
 stages:
   - build
 
-# Run `cargo build` for the project with stable Rust
 build-linux:
   stage: build
   image: ekidd/rust-musl-builder:latest
   script:
   - rustc --version && cargo --version
   - cargo build --release --jobs 1
+  - cp target/release/non-answer-generator ./non-answer-generator
+  - cp example/config.json ./config.json
   artifacts:
     paths:
-      - target
+      - non-answer-generator
+      - config.json
+      - README.md
   cache:
     paths:
       - target/
@@ -23,31 +24,36 @@ build-linux:
     GIT_STRATEGY: fetch
     CARGO_HOME: "$CI_PROJECT_DIR/.cargo"
 
-build-windows:
-  stage: build
-  image: docker:stable
-  services:
-    - docker:dind
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_DRIVER: overlay2
-  script:
-  - echo 'http://dl-cdn.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories
-  - apk update
-  - apk upgrade
-  - apk add rustup
-  - rustup add x86_64-pc-windows-gnu
-  - cargo install cross
-  - PATH=$CI_PROJECT_DIR/.cargo/bin:$PATH
-  - cross build --release --target x86_64-pc-windows-gnu --jobs 1
-  artifacts:
-    paths:
-      - target
-  cache:
-    key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
-    paths:
-      - target/
-      - .cargo/
-  variables:
-    GIT_STRATEGY: fetch
-    CARGO_HOME: "$CI_PROJECT_DIR/.cargo"
+# build-windows:
+#   stage: build
+#   image: ubuntu:16.04
+#   # services:
+#   #   - docker:dind
+#   # variables:
+#   #   DOCKER_HOST: tcp://docker:2375
+#   #   DOCKER_DRIVER: overlay2
+#   before_script:
+#     - sudo apt-get update
+#     - sudo apt-get install -y gcc
+#   script:
+#     - curl https://sh.rustup.rs -sSf | sh -s -- -y
+#     - PATH=$CI_PROJECT_DIR/.cargo/bin:$PATH
+#     - rustup default stable && \
+#       rustup target add x86_64-unknown-linux-musl && \
+#       rustup target add x86_64-apple-darwin && \
+#       rustup target add x86_64-pc-windows-gnu
+#     - rustup target add x86_64-pc-windows-gnu
+#     - cargo install cross
+#
+#     - cross build --release --target x86_64-pc-windows-gnu --jobs 1
+#   artifacts:
+#     paths:
+#       - target
+#   cache:
+#     key: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+#     paths:
+#       - target/
+#       - .cargo/
+#   variables:
+#     GIT_STRATEGY: fetch
+#     CARGO_HOME: "$CI_PROJECT_DIR/.cargo"
