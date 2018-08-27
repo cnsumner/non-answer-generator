@@ -25,30 +25,22 @@ stages:
 
 build-windows:
   stage: build
-  image: ubuntu:16.04
-  services:
-    - docker:dind
-  variables:
-    DOCKER_HOST: tcp://docker:2375
-    DOCKER_DRIVER: overlay2
+  image: gitlab/dind
+  # services:
+  #   - docker:dind
+  # variables:
+  #   DOCKER_HOST: tcp://docker:2375
+  #   DOCKER_DRIVER: overlay2
   script:
-  - echo 'deb http://de.archive.ubuntu.com/ubuntu/ xenial-updates main restricted' >> /etc/apt/sources.list
-  - echo 'deb-src http://de.archive.ubuntu.com/ubuntu/ xenial-updates main multiverse restricted universe' >> /etc/apt/sources.list
-  - apt-get update && apt-get upgrade
-  - apt-get install -y \
-    build-essential \
-    ca-cacert \
-    clang \
-    curl \
-    git
-  - apt-get clean
   - curl https://sh.rustup.rs -sSf | sh -s -- -y && \
     rustup default stable && \
     rustup target add x86_64-unknown-linux-musl && \
     rustup target add x86_64-apple-darwin && \
     rustup target add x86_64-pc-windows-gnu
+  - rustup target add x86_64-pc-windows-gnu
+  - cargo install cross
   - PATH=$CI_PROJECT_DIR/.cargo/bin:$PATH
-  - cargo build --release --target x86_64-pc-windows-gnu --jobs 1
+  - cross build --release --target x86_64-pc-windows-gnu --jobs 1
   artifacts:
     paths:
       - target
