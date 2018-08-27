@@ -32,6 +32,7 @@ build-windows:
   #   DOCKER_HOST: tcp://docker:2375
   #   DOCKER_DRIVER: overlay2
   script:
+  - apt-get install gcc
   - curl https://sh.rustup.rs -sSf | sh -s -- -y
   - PATH=$CI_PROJECT_DIR/.cargo/bin:$PATH
   - rustup default stable && \
