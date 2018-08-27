@@ -32,6 +32,8 @@ build-windows:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_DRIVER: overlay2
   script:
+  - echo 'deb http://de.archive.ubuntu.com/ubuntu/ xenial-updates main restricted' >> /etc/apt/sources.list
+  - echo 'deb-src http://de.archive.ubuntu.com/ubuntu/ xenial-updates main multiverse restricted universe' >> /etc/apt/sources.list
   - apt-get update && apt-get upgrade
   - apt-get install -y \
     build-essential \
