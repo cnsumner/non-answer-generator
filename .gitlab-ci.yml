@@ -25,7 +25,7 @@ stages:
 
 build-windows:
   stage: build
-  image: rust:latest
+  image: ekidd/rust-musl-builder:latest
   services:
     - docker:dind
   variables:
