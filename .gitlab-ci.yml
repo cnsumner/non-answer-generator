@@ -34,6 +34,7 @@ build-windows:
   script:
   - curl -fsSL https://get.docker.com -o get-docker.sh
   - sh get-docker.sh
+  - dockerd
   - docker version
   - rustup target add x86_64-pc-windows-gnu
   - cargo install cross
