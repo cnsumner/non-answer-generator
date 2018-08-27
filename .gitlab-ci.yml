@@ -33,7 +33,7 @@ build-windows:
   #   DOCKER_DRIVER: overlay2
   before_script:
     - sudo apt-get update
-    - sudo apt-get install gcc
+    - sudo apt-get install -y gcc
   script:
     - curl https://sh.rustup.rs -sSf | sh -s -- -y
     - PATH=$CI_PROJECT_DIR/.cargo/bin:$PATH
