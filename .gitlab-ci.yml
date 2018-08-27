@@ -32,14 +32,15 @@ build-windows:
   #   DOCKER_HOST: tcp://docker:2375
   #   DOCKER_DRIVER: overlay2
   script:
-  - curl https://sh.rustup.rs -sSf | sh -s -- -y && \
-    rustup default stable && \
+  - curl https://sh.rustup.rs -sSf | sh -s -- -y
+  - PATH=$CI_PROJECT_DIR/.cargo/bin:$PATH
+  - rustup default stable && \
     rustup target add x86_64-unknown-linux-musl && \
     rustup target add x86_64-apple-darwin && \
     rustup target add x86_64-pc-windows-gnu
   - rustup target add x86_64-pc-windows-gnu
   - cargo install cross
-  - PATH=$CI_PROJECT_DIR/.cargo/bin:$PATH
+
   - cross build --release --target x86_64-pc-windows-gnu --jobs 1
   artifacts:
     paths:
