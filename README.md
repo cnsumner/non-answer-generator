@@ -60,6 +60,6 @@ How do I add it to my server?
 Can you add X feature?
 ------------
 
-Maybe. If I have time and think it's worth while.
+Maybe. If I have time and think it's worthwhile.
 
 Better yet, learn rust (if you don't already know it), add the feature yourself and submit a pull request so I can add your work to the repository.  Contributions are welcome and encouraged.
