@@ -35,16 +35,27 @@ The following command can also be used:
 How do I add it to my server?
 ------------
 
+### Installation (follow instructions for your operating system below, then continue to configuration instructions)
+#### Linux
+
+1. Download [the latest build](https://gitlab.com/cnsumner/non-answer-generator/-/jobs/artifacts/master/download?job=build-linux)
+2. Upzip `artifacts.zip` somewhere you want to keep it
+
+#### Windows or some other system
+
 1. Go [here](https://www.rust-lang.org/en-US/install.html) and follow the instructions to install Rust on your system
 2. Download this repository and unzip it somewhere
 3. Open a command prompt or terminal in the folder you just unzipped
 4. Run the command `cargo build --release` and let it finish (it will take a few minutes)
 5. Open up the new folder that got created: `./target/release/`
 6. Take the binary file (`non-answer-generator.exe` on Windows, or `non-answer-generator` on Linux) and toss it in the `example` folder back in the first folder you unzipped
-7. Edit `config.json` and add your discord bot token to it (if you don't know where to get this, google it)
-8. Run the binary file/executable
-9. Do a Google search to figure out how to connect the bot to your server
-10. Send some messages and enjoy the chaos
+
+### Configuration
+
+1. Edit `config.json` and add your discord bot token to it (if you don't know where to get this, google it)
+2. Run the binary file/executable
+3. Do a Google search to figure out how to invite the bot to your server
+4. Send some messages and enjoy the chaos
 
 Can you add X feature?
 ------------
