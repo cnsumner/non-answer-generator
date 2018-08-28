@@ -39,7 +39,7 @@ How do I add it to my server?
 #### Linux
 
 1. Download [the latest build](https://gitlab.com/cnsumner/non-answer-generator/-/jobs/artifacts/master/download?job=build-linux)
-2. Upzip `artifacts.zip` somewhere you want to keep it
+2. Unzip `artifacts.zip` somewhere you want to keep it
 
 #### Windows or some other system
 
