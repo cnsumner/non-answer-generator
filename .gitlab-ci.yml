@@ -27,7 +27,7 @@ stages:
 #     CARGO_HOME: "$CI_PROJECT_DIR/.cargo"
 
 build-windows:
-  image: imnijar/rust:windows
+  image: omnijar/rust:windows
   stage: build
   script:
     - cargo build --release --target x86_64-pc-windows-msvc
