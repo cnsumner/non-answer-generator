@@ -30,7 +30,7 @@ build-windows:
   image: omnijar/rust:windows
   stage: build
   script:
-    - cargo build --release --target x86_64-pc-windows-msvc
+    - cargo build --release --target x86_64-pc-windows-gnu
   artifacts:
     paths:
       - target
