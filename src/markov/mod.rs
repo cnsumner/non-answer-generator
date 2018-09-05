@@ -5,14 +5,15 @@ use rand;
 use rand::Rng;
 use regex::Regex;
 use serde_json;
-use std::collections::HashMap;
+// use std::collections::HashMap;
+use indexmap::IndexMap;
 use std::fs::OpenOptions;
 use std::io::prelude::*;
 use typemap::Key;
 
 pub struct Markov {
     path: String,
-    db: HashMap<String, Word>,
+    db: IndexMap<String, Word>,
 }
 
 impl Key for Markov {
@@ -40,7 +41,7 @@ impl Markov {
         let mut seed_word = seed_words.last().unwrap().to_string();
         let mut sentence = String::from(seed_words.join(" "));
         let mut word_count = 1;
-        while word_count <= count || "for|and|that|the|on|by|in|can|a|with|so|i|of|to|you|but|be|he|she|cuz|very|oh".contains(seed_word.as_str()) {
+        while word_count <= count || "for|and|that|the|on|by|in|can|a|with|so|i|of|to|you|but|be|he|she|cuz|very|oh|his".contains(seed_word.as_str()) {
             sentence.push(' ');
             if !(self.db.contains_key(&seed_word)) || seed_word == "" {
                 seed_word = self.get_random_word().word().to_string();
@@ -135,7 +136,7 @@ impl Markov {
                 Ok(hash_map) => hash_map,
                 Err(e) => {
                     println!("Empty file (normal for first run) or error deserializing JSON (see error): {:?}", e);
-                    HashMap::new()
+                    IndexMap::new()
                 }
             },
         }
